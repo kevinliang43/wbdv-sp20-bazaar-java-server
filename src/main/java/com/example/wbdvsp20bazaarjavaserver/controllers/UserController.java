@@ -29,6 +29,18 @@ public class UserController {
             return this.service.findUserById(uid);
     }
 
+    @GetMapping("/api/users/email/{email}")
+    public User findUserByEmail(
+        @PathVariable String email) {
+            return this.service.findUserByEmail(email);
+    }
+
+    @GetMapping("/api/users/username/{username}")
+    public User findUserByUsername(
+        @PathVariable String username) {
+            return this.service.findUserByUsername(username);
+    }
+
     @PutMapping("/api/users/{uid}")
     public int updateTopic(
         @PathVariable int uid, 
