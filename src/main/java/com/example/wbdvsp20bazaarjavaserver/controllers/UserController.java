@@ -40,17 +40,4 @@ public class UserController {
         @PathVariable String username) {
             return this.service.findUserByUsername(username);
     }
-
-    @PutMapping("/api/users/{uid}")
-    public int updateTopic(
-        @PathVariable int uid, 
-        @RequestBody User user) {
-            return this.service.updateUser(uid, user);
-    }
-
-    @DeleteMapping("/api/users/{uid}")
-    public int deleteTopic(
-        @PathVariable int uid) {
-            return this.service.deleteUser(uid);
-    }
 }
