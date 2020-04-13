@@ -17,8 +17,9 @@ public class UserController {
     public User createUser(HttpSession session,
         @RequestBody User newUser) {
             User user = this.service.createUser(newUser);
-            user.setPassword("***");
-            session.setAttribute("profile", user);
+            // TODO: We may want to log them in as soon as they register?
+            // user.setPassword("***");
+            // session.setAttribute("profile", user);
             return user;
     } 
 
