@@ -33,6 +33,10 @@ public class UserService {
         return userRepository.findUserByUsername(username);
     }
 
+    public User findUserByCredentials(String username, String password) {
+        return userRepository.findUserByCredentials(username, password);
+    }
+
     public int deleteUser(int uid) {
         try {
             userRepository.deleteById(uid);
