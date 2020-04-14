@@ -22,7 +22,7 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     @Query("SELECT user FROM User user")
     public List<User> findAllUsers();
 
-    @Query("SELECT user FROM User user WHERE user.username= BINARY :username AND user.password= BINARY :password")
+    @Query("SELECT user FROM User user WHERE user.username=:username AND user.password=:password")
     public User findUserByCredentials(
             @Param("username") String username,
             @Param("password") String password
