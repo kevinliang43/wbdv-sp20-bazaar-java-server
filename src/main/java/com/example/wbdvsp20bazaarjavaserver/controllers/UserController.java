@@ -75,10 +75,10 @@ public class UserController {
             this.service.updateUser(uid, updatedUser); // TODO: Send different response if update fails on severside.
             // IF IT WORKS
             System.out.println("BEFORE");
-            System.out.println(session);
+            System.out.println(session.getAttribute("profile"));
             session.setAttribute("profile", updatedUser);
             System.out.println("AFTER");
-            System.out.println(session);
+            System.out.println(session.getAttribute("profile"));
             // TODO: if it doesnt work, handle the case here
 
             //Return
