@@ -66,26 +66,21 @@ public class UserController {
     }
 
     @PutMapping("/api/users/{uid}")
-    public User updateUser(HttpSession session,
+    public int updateUser(HttpSession session,
         @PathVariable int uid,
         @RequestBody User updatedUser) {
 
+        // Allow updates only if the session User Id matches the Id of User being updated
         if (((User)session.getAttribute("profile")).getId() == updatedUser.getId()) {
-            // Allow updates only if the session User Id matches the Id of User being updated
-            this.service.updateUser(uid, updatedUser); // TODO: Send different response if update fails on severside.
-            // IF IT WORKS
-            System.out.println("BEFORE");
-            System.out.println(session.getAttribute("profile"));
-            session.setAttribute("profile", updatedUser);
-            System.out.println("AFTER");
-            System.out.println(session.getAttribute("profile"));
-            // TODO: if it doesnt work, handle the case here
-
-            //Return
-            return updatedUser;
+            int updateStatus = this.service.updateUser(uid, updatedUser);
+            if (updateStatus == 1) {
+                // Update Session profile if the update was successful.
+                session.setAttribute("profile", updatedUser);
+            }
+            return updateStatus;
         }
-        else {
-            return null;
+        else { // Session User id does not match the id of the user being updated.
+            return 0;
         }
     }
 
