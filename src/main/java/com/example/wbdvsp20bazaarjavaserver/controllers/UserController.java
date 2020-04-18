@@ -84,4 +84,9 @@ public class UserController {
         }
     }
 
+    @DeleteMapping("/api/users/{uid}")
+    public int deleteWidget(@PathVariable("uid") int uid) {
+        return service.deleteUser(uid);
+    }
+
 }
