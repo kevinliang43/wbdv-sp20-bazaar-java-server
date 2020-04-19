@@ -85,8 +85,23 @@ public class UserController {
     }
 
     @DeleteMapping("/api/users/{uid}")
-    public int deleteUser(@PathVariable("uid") int uid) {
-        return service.deleteUser(uid);
+    public int deleteUser(HttpSession session,
+        @PathVariable("uid") int uid) {
+
+        // Allow deletes only if the session User Id matches the Id of User being deleted.
+        if (((User)session.getAttribute("profile")).getId() == uid) {
+            int deleteStatus = service.deleteUser(uid);
+            if (deleteStatus == 1) {
+                // Invalidate the session if the delete was successful.
+                session.invalidate();
+            }
+            return deleteStatus;
+
+        }
+        else {
+            // Session User Id does not match the id of the user being deleted.
+            return 0;
+        }
     }
 
 }
