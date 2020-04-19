@@ -14,9 +14,7 @@ public class User {
 
     private String username;
     private String password;
-
-    @Temporal(TemporalType.DATE)
-    private Date dateOfBirth;
+    private String imageUrl;
     private String email;
     private String firstName;
     private String lastName;
@@ -38,8 +36,8 @@ public class User {
         return this.password;
     }
 
-    public Date getDateOfBirth() {
-        return this.dateOfBirth;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
     public String getEmail() {
@@ -70,11 +68,11 @@ public class User {
         this.password = password;
     }
 
-    public void getDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
-    public void getEmail(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
