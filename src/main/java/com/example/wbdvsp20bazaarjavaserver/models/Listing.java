@@ -26,6 +26,8 @@ public class Listing {
     @JsonIgnore
     private User user;
 
+    private int uid;
+
     @Temporal(TemporalType.DATE)
     private Date date;
 
@@ -60,6 +62,10 @@ public class Listing {
 
     public User getUser() {
         return this.user;
+    }
+
+    public int getUid() {
+        return this.uid;
     }
 
     public Date getDate() {
@@ -97,6 +103,10 @@ public class Listing {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
     public void setDate(Date date) {
