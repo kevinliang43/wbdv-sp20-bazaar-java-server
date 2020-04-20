@@ -1,4 +1,7 @@
 package com.example.wbdvsp20bazaarjavaserver.models;
+
+import java.util.Date;
+
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -22,6 +25,9 @@ public class Listing {
     @ManyToOne
     @JsonIgnore
     private User user;
+
+    @Temporal(TemporalType.DATE)
+    private Date date;
 
     // Getters
     public int getId() {
@@ -56,6 +62,10 @@ public class Listing {
         return this.user;
     }
 
+    public Date getDate() {
+        return this.date;
+    }
+
     // Setters
     public void setId(int id) {
         this.id = id;
@@ -87,6 +97,10 @@ public class Listing {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
 }
