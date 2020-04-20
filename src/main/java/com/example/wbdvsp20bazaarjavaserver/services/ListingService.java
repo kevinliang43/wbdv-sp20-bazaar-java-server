@@ -29,6 +29,10 @@ public class ListingService {
         return listingRepository.findAllListings();
     }
 
+    public List<Listing> findListingforUserId(int uid) {
+        return listingRepository.findListingsForUser(uid);
+    }
+
     public Listing findListingById(int listingId) {
         return listingRepository.findListingById(listingId);
     }

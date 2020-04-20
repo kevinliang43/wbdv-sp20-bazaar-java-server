@@ -12,25 +12,31 @@ import javax.servlet.http.HttpSession;
 public class ListingController {
 
     @Autowired
-    ListingService service = new ListingService();
+    ListingService listingService = new ListingService();
 
     @PostMapping("/api/users/{uid}/listings")
     public Listing createListing(HttpSession session,
         @RequestBody Listing newListing,
         @PathVariable int uid) {
-            Listing listing = this.service.createListing(uid, newListing);
+            Listing listing = this.listingService.createListing(uid, newListing);
             return listing;
     } 
 
     @GetMapping("/api/listings")
     public List<Listing> findAllListings() {
-            return this.service.findAllListing();
+            return this.listingService.findAllListing();
+    }
+
+    @GetMapping("/api/users/{uid}/listings")
+    public List<Listing> findListingsForUserId(
+        @PathVariable("uid") int uid) {
+            return this.listingService.findListingforUserId(uid);
     }
 
     @GetMapping("/api/listings/{lid}")
     public Listing findListingById(
         @PathVariable int lid) {
-            return this.service.findListingById(lid);
+            return this.listingService.findListingById(lid);
     }
 
     @PutMapping("/api/users/{uid}/listings/{lid}")
@@ -41,7 +47,7 @@ public class ListingController {
 
         // Allow updates only if the session User Id matches the Id of User being updated
         if (((User)session.getAttribute("profile")).getId() == uid) {
-            int updateStatus = this.service.updateListing(uid, updatedListing);
+            int updateStatus = this.listingService.updateListing(uid, updatedListing);
             return updateStatus;
         }
         else { // Session User id does not match the id of the user being updated.
@@ -56,7 +62,7 @@ public class ListingController {
 
         // Allow deletes only if the session User Id matches the Id of User being deleted.
         if (((User)session.getAttribute("profile")).getId() == uid) {
-            int deleteStatus = service.deleteListing(lid);
+            int deleteStatus = listingService.deleteListing(lid);
             return deleteStatus;
         }
         else {
