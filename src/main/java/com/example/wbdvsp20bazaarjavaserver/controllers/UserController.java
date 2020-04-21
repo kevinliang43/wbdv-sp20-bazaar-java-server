@@ -71,7 +71,7 @@ public class UserController {
         @RequestBody User updatedUser) {
 
         // Allow updates only if the session User Id matches the Id of User being updated
-        if (((User)session.getAttribute("profile")).getId() == updatedUser.getId()) {
+        if (((User)session.getAttribute("profile")).getId() == updatedUser.getId() || ((User)session.getAttribute("profile")).getRole() == "ADMIN") {
             int updateStatus = this.service.updateUser(uid, updatedUser);
             if (updateStatus == 1) {
                 // Update Session profile if the update was successful.
