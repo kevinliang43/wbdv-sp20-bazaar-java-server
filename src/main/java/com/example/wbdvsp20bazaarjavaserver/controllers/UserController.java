@@ -74,11 +74,18 @@ public class UserController {
         if (((User)session.getAttribute("profile")).getId() == updatedUser.getId()) {
             int updateStatus = this.service.updateUser(uid, updatedUser);
             if (updateStatus == 1) {
-                // Update Session profile if the update was successful.
+                // Update Session profile if the update was successful and the Session matches the session being updated
                 session.setAttribute("profile", updatedUser);
             }
             return updateStatus;
         }
+
+        // Allow Admins to update users
+        else if (((User)session.getAttribute("profile")).getRole().equals("ADMIN")) {
+            int updateStatus = this.service.updateUser(uid, updatedUser);
+            return updateStatus;
+        }
+
         else { // Session User id does not match the id of the user being updated.
             return 0;
         }

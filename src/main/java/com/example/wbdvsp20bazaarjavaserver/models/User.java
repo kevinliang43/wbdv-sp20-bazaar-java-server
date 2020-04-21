@@ -20,8 +20,9 @@ public class User {
     private String firstName;
     private String lastName;
     private String city;
+    private String role;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
     private List<Listing> listings;
 
     public int getId() {
@@ -60,6 +61,10 @@ public class User {
         return this.listings;
     }
 
+    public String getRole() {
+        return this.role;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -94,5 +99,9 @@ public class User {
 
     public void setListings(List<Listing> listings) {
         this.listings = listings;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
