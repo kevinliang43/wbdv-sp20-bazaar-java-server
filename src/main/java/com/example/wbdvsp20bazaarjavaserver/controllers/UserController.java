@@ -71,17 +71,25 @@ public class UserController {
         @RequestBody User updatedUser) {
 
         // Allow updates only if the session User Id matches the Id of User being updated OR if it is an admin
-        if (((User)session.getAttribute("profile")).getId() == updatedUser.getId() || ((User)session.getAttribute("profile")).getRole() == "ADMIN") {
+        if (((User)session.getAttribute("profile")).getId() == updatedUser.getId()) {
             int updateStatus = this.service.updateUser(uid, updatedUser);
-            if (updateStatus == 1 && ((User)session.getAttribute("profile")).getId() == updatedUser.getId()) {
+            if (updateStatus == 1) {
                 // Update Session profile if the update was successful and the Session matches the session being updated
                 session.setAttribute("profile", updatedUser);
             }
             System.out.println("Failing at Point 1");
             return updateStatus;
         }
-        else { // Session User id does not match the id of the user being updated.
+
+
+        else if (((User)session.getAttribute("profile")).getRole().equals("ADMIN")) {
+            int updateStatus = this.service.updateUser(uid, updatedUser);
             System.out.println("Failing at Point 2");
+            return updateStatus;
+        }
+
+        else { // Session User id does not match the id of the user being updated.
+            System.out.println("Failing at Point 3");
             return 0;
         }
     }
