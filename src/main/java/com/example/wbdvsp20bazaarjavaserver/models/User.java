@@ -1,8 +1,9 @@
 package com.example.wbdvsp20bazaarjavaserver.models;
 
+import java.util.List;
+
 import javax.persistence.*;
 
-import java.util.Date;
 
 @Entity
 @Table(name = "users")
@@ -20,9 +21,8 @@ public class User {
     private String lastName;
     private String city;
 
-    // TODO:
-    // private int locationId;
-    // private String pictureUrl;
+    @OneToMany(mappedBy = "user")
+    private List<Listing> listings;
 
     public int getId() {
         return this.id;
@@ -56,6 +56,10 @@ public class User {
         return this.city;
     }
 
+    public List<Listing> getListings() {
+        return this.listings;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -86,5 +90,9 @@ public class User {
     
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public void setListings(List<Listing> listings) {
+        this.listings = listings;
     }
 }
