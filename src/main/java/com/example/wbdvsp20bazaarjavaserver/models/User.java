@@ -22,7 +22,7 @@ public class User {
     private String city;
     private String role;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
     private List<Listing> listings;
 
     public int getId() {
