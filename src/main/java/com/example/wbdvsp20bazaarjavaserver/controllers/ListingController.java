@@ -56,9 +56,9 @@ public class ListingController {
     }
 
     @DeleteMapping("/api/users/{uid}/listings/{lid}")
-    public int deleteUser(HttpSession session,
-        @PathVariable("lid") int lid,
-        @PathVariable("uid") int uid) {
+    public int deleteListing(HttpSession session,
+                             @PathVariable("lid") int lid,
+                             @PathVariable("uid") int uid) {
 
         // Allow deletes only if the session User Id matches the Id of User being deleted.
         if (((User)session.getAttribute("profile")).getId() == uid) {
