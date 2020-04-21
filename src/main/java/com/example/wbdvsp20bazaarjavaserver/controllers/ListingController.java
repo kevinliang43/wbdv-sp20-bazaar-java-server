@@ -47,7 +47,7 @@ public class ListingController {
 
         // Allow updates only if the session User Id matches the Id of User being updated
         if (((User)session.getAttribute("profile")).getId() == uid) {
-            int updateStatus = this.listingService.updateListing(uid, updatedListing);
+            int updateStatus = this.listingService.updateListing(lid, updatedListing);
             return updateStatus;
         }
         else { // Session User id does not match the id of the user being updated.
