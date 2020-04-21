@@ -77,9 +77,11 @@ public class UserController {
                 // Update Session profile if the update was successful and the Session matches the session being updated
                 session.setAttribute("profile", updatedUser);
             }
+            System.out.println("Failing at Point 1");
             return updateStatus;
         }
         else { // Session User id does not match the id of the user being updated.
+            System.out.println("Failing at Point 2");
             return 0;
         }
     }
